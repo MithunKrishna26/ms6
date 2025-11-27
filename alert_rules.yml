@@ -1,0 +1,21 @@
+# alert_rules.yml
+groups:
+  - name: delivery_alerts
+    rules:
+      - alert: HighPendingDeliveries
+        expr: pending_deliveries > 40
+        for: 30s
+        labels:
+          severity: warning
+        annotations:
+          summary: "High pending deliveries"
+          description: "Pending deliveries > 40 for more than 30s."
+
+      - alert: HighAverageDeliveryTime
+        expr: (average_delivery_time_sum / average_delivery_time_count) > 30
+        for: 30s
+        labels:
+          severity: critical
+        annotations:
+          summary: "High average delivery time"
+          description: "Average delivery time > 30s for more than 30s."
